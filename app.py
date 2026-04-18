@@ -36,6 +36,11 @@ def salary():
 def meetings():
     return render_template('meetings.html')
 
+@app.route('/resume')
+def home():
+    return render_template('resume.html')
+
+
 @app.route('/gallery')
 def gallery():
     return render_template('gallery.html')

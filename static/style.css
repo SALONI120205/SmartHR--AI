@@ -213,3 +213,42 @@ th {
         flex-direction: column;
     }
 }
+/* EMPLOYEE PAGE FIX */
+.card input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.card button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #4a6cf7;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.card button:hover {
+    background: #3451d1;
+}
+
+/* TABLE LOOK */
+table {
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th {
+    text-align: left;
+}
+
+td button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: red;
+    color: white;
+}

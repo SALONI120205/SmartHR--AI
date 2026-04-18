@@ -30,23 +30,27 @@ function analyze(){
     function go(path) {
     window.location.href = path;
 }
-
-function analyzeResume() {
-    let file = document.getElementById("resumeFile").files[0];
-
-    if (!file) {
-        alert("Upload resume first");
-        return;
-    }
-
-    // Demo AI score
+function analyzeResume(){
     let score = Math.floor(Math.random() * 100);
 
-    document.getElementById("score").innerText = "Score: " + score;
+    let resultBox = document.getElementById("resultBox");
+    let scoreText = document.getElementById("scoreText");
+    let statusText = document.getElementById("statusText");
+    let progressBar = document.getElementById("progressBar");
 
-    if (score > 70) {
-        document.getElementById("result").innerText = "✅ Selected";
-    } else {
-        document.getElementById("result").innerText = "❌ Rejected";
+    resultBox.classList.remove("hidden");
+
+    scoreText.innerText = "Score: " + score + "%";
+    progressBar.style.width = score + "%";
+
+    if(score >= 60){
+        statusText.innerText = "✅ Selected";
+        statusText.style.color = "green";
+        progressBar.style.background = "green";
+    }else{
+        statusText.innerText = "❌ Rejected";
+        statusText.style.color = "red";
+        progressBar.style.background = "red";
     }
 }
+ 

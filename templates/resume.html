@@ -1,36 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Resume AI - SmartHR</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <script src="/js/ai.js"></script>
-</head>
-
-<body>
-
-<div class="sidebar">
-    <h2>SmartHR</h2>
-
-    <button onclick="go('/dashboard')">📊 Dashboard</button>
-    <button onclick="go('/employees')">👨‍💼 Employees</button>
-    <button onclick="go('/calendar')">📅 Calendar</button>
-    <button onclick="go('/attendance')">📝 Attendance</button>
-    <button onclick="go('/salary')">💰 Salary</button>
-    <button onclick="go('/meetings')">⏰ Meetings</button>
-    <button class="active">🤖 Resume AI</button>
-</div>
-
 <div class="main">
-    <h1>🤖 AI Resume Screening</h1>
 
-    <div class="card">
-        <input type="file" id="resumeFile">
-        <button onclick="analyzeResume()">Analyze Resume</button>
+    <h1 class="page-title">🤖 AI Resume Screening</h1>
 
-        <h2 id="score"></h2>
-        <h3 id="result"></h3>
+    <div class="resume-container">
+
+        <div class="resume-card">
+
+            <label class="upload-box">
+                <input type="file" id="resumeFile">
+                <span>📄 Upload Resume</span>
+            </label>
+
+            <button onclick="analyzeResume()" class="analyze-btn">
+                Analyze Resume
+            </button>
+
+            <!-- RESULT -->
+            <div id="resultBox" class="result-box hidden">
+                <h2 id="scoreText">Score: 0%</h2>
+
+                <div class="progress">
+                    <div id="progressBar"></div>
+                </div>
+
+                <p id="statusText"></p>
+            </div>
+
+        </div>
+
     </div>
-</div>
 
-</body>
-</html>
+</div>

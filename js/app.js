@@ -104,9 +104,9 @@ function showEmployees(){
             <td>${emp.role}</td>
             <td>₹${emp.salary}</td>
             <td style="text-align:center;">
-                <button class="delete-btn" onclick="deleteEmployee(${index})">
-                    ❌ Delete
-                </button>
+              <button onclick="deleteEmployee(${index})" class="delete-btn">
+    ❌ Delete
+</button> 
             </td>
         </tr>
         `;
@@ -114,13 +114,15 @@ function showEmployees(){
 }
 
 // DELETE
-function deleteEmp(i) {
+function deleteEmployee(index){
     let list = JSON.parse(localStorage.getItem("employees")) || [];
-    list.splice(i, 1);
-    localStorage.setItem("employees", JSON.stringify(list));
-    showEmployees();
-}
 
+    list.splice(index, 1); // remove item
+
+    localStorage.setItem("employees", JSON.stringify(list));
+
+    showEmployees(); // refresh table
+}
 // AUTO LOAD
 window.onload = function () {
     showEmployees();

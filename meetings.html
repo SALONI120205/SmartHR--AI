@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Meetings</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/app.js"></script>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>SmartHR</h2>
+    <a onclick="go('index.html')">🏠 Home</a>
+    <a onclick="go('employees.html')">👨‍💼 Employees</a>
+    <a onclick="go('calendar.html')">📅 Calendar</a>
+    <a class="active">⏰ Meetings</a>
+    <a onclick="go('gallery.html')">🖼 Gallery</a>
+</div>
+
+<div class="main">
+    <h1>⏰ Meeting Scheduler</h1>
+
+    <div class="card">
+        <input type="text" id="title" placeholder="Meeting Title">
+        <input type="date" id="date">
+        <input type="time" id="time">
+        <button onclick="addMeeting()">Add</button>
+    </div>
+
+    <div class="card">
+        <h3>Scheduled Meetings</h3>
+        <ul id="meetList"></ul>
+    </div>
+</div>
+
+<script>
+function addMeeting(){
+    let title = document.getElementById("title").value;
+    let date = document.getElementById("date").value;
+    let time = document.getElementById("time").value;
+
+    if(title && date && time){
+        let list = JSON.parse(localStorage.getItem("meetings")) || [];
+        list.push({title,date,time});
+        localStorage.setItem("meetings", JSON.stringify(list));
+        show();
+    }
+}
+
+function show(){
+    let list = JSON.parse(localStorage.getItem("meetings")) || [];
+    let ul = document.getElementById("meetList");
+    ul.innerHTML = "";
+
+    list.forEach(m=>{
+        let li = document.createElement("li");
+        li.innerText = m.title + " | " + m.date + " | " + m.time;
+        ul.appendChild(li);
+    });
+}
+
+show();
+</script>
+
+</body>
+</html>

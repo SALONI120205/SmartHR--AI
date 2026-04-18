@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Salary</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/app.js"></script>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>SmartHR</h2>
+    <a onclick="go('index.html')">🏠 Home</a>
+    <a onclick="go('employees.html')">👨‍💼 Employees</a>
+    <a onclick="go('attendance.html')">📅 Attendance</a>
+    <a class="active">💰 Salary</a>
+</div>
+
+<div class="main">
+    <h1>💰 Salary Management</h1>
+
+    <div class="card">
+        <input type="text" id="emp" placeholder="Employee Name">
+        <input type="number" id="salary" placeholder="Salary">
+        <button onclick="addSalary()">Add</button>
+    </div>
+
+    <div class="card">
+        <h3>Salary List</h3>
+        <ul id="salaryList"></ul>
+    </div>
+</div>
+
+<script>
+const WORKING_DAYS = 30;
+
+function addSalary(){
+    let emp = document.getElementById("emp").value.trim();
+    let salary = Number(document.getElementById("salary").value);
+
+    if(emp && salary){
+        let list = JSON.parse(localStorage.getItem("salary")) || [];
+
+        // upsert (update if exists)
+        const idx = list.findIndex(x => x.emp.toLowerCase() === emp.toLowerCase());
+        if(idx >= 0) list[idx].salary = salary;
+        else list.push({emp, salary});
+
+        localStorage.setItem("salary", JSON.stringify(list));
+        showSalary();
+    }
+}
+
+function getAttendanceSummary(){
+    const list = JSON.parse(localStorage.getItem("attendance")) || [];
+    const map = {}; // { emp: {present, absent} }
+
+    list.forEach(a=>{
+        const key = a.emp.toLowerCase();
+        if(!map[key]) map[key] = {present:0, absent:0};
+        if(a.status === "Present") map[key].present++;
+        else map[key].absent++;
+    });
+    return map;
+}
+
+function showSalary(){
+    let list = JSON.parse(localStorage.getItem("salary")) || [];
+    let ul = document.getElementById("salaryList");
+    ul.innerHTML = "";
+
+    const att = getAttendanceSummary();
+
+    list.forEach(s=>{
+        const key = s.emp.toLowerCase();
+        const present = att[key]?.present || 0;
+        const absent = att[key]?.absent || 0;
+
+        const perDay = s.salary / WORKING_DAYS;
+        const earned = Math.round(perDay * present);
+        const deducted = Math.round(perDay * absent);
+
+        let li = document.createElement("li");
+        li.innerHTML = `
+            <b>${s.emp}</b><br>
+            Base: ₹${s.salary} | Present: ${present} | Absent: ${absent}<br>
+            Earned: <span style="color:green">₹${earned}</span> 
+            | Deduction: <span style="color:red">₹${deducted}</span>
+        `;
+        ul.appendChild(li);
+    });
+}
+
+showSalary();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Attendance</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/app.js"></script>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>SmartHR</h2>
+    <a onclick="go('index.html')">🏠 Home</a>
+    <a onclick="go('employees.html')">👨‍💼 Employees</a>
+    <a class="active">📅 Attendance</a>
+    <a onclick="go('salary.html')">💰 Salary</a>
+</div>
+
+<div class="main">
+    <h1>📅 Attendance</h1>
+
+    <div class="card">
+        <input type="text" id="emp" placeholder="Employee Name">
+<input type="date" id="date">
+<select id="status">
+    <option value="Present">Present</option>
+    <option value="Absent">Absent</option>
+</select>
+<button onclick="markAttendance()">Mark</button>
+    </div>
+
+    <div class="card">
+        <h3>Attendance Records</h3>
+        <ul id="attList"></ul>
+    </div>
+</div>
+
+<script>
+function markAttendance(){
+    let emp = document.getElementById("emp").value.trim();
+    let date = document.getElementById("date").value;
+    let status = document.getElementById("status").value;
+
+    if(emp && date){
+        let list = JSON.parse(localStorage.getItem("attendance")) || [];
+        list.push({emp, date, status});
+        localStorage.setItem("attendance", JSON.stringify(list));
+        showAttendance();
+    }
+}
+
+function showAttendance(){
+    let list = JSON.parse(localStorage.getItem("attendance")) || [];
+    let ul = document.getElementById("attList");
+    ul.innerHTML = "";
+
+    list.forEach(a=>{
+        let li = document.createElement("li");
+        li.innerText = `${a.emp} | ${a.date} | ${a.status}`;
+        ul.appendChild(li);
+    });
+}
+
+showAttendance();
+
+
+function showAttendance(){
+    let list = JSON.parse(localStorage.getItem("attendance")) || [];
+    let ul = document.getElementById("attList");
+    ul.innerHTML = "";
+
+    list.forEach(a=>{
+        let li = document.createElement("li");
+        li.innerText = a.emp + " - " + a.status;
+        ul.appendChild(li);
+    });
+}
+
+showAttendance();
+</script>
+
+</body>
+</html>

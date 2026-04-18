@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Employees</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/app.js"></script>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>SmartHR</h2>
+    <a onclick="go('index.html')">🏠 Home</a>
+    <a class="active">👨‍💼 Employees</a>
+    <a onclick="go('calendar.html')">📅 Calendar</a>
+    <a onclick="go('meetings.html')">⏰ Meetings</a>
+    <a onclick="go('gallery.html')">🖼 Gallery</a>
+</div>
+
+<div class="main">
+    <h1>👨‍💼 Employees</h1>
+
+    <div class="card">
+        <input type="text" id="name" placeholder="Employee Name">
+        <button onclick="addEmp()">Add</button>
+    </div>
+
+    <div class="card">
+        <h3>Employee List</h3>
+        <ul id="empList"></ul>
+    </div>
+</div>
+
+<script>
+function addEmp(){
+    let name = document.getElementById("name").value;
+
+    if(name){
+        let list = JSON.parse(localStorage.getItem("emps")) || [];
+        list.push(name);
+        localStorage.setItem("emps", JSON.stringify(list));
+        display();
+    }
+}
+
+function display(){
+    let list = JSON.parse(localStorage.getItem("emps")) || [];
+    let ul = document.getElementById("empList");
+    ul.innerHTML = "";
+
+    list.forEach(e=>{
+        let li = document.createElement("li");
+        li.innerText = e;
+        ul.appendChild(li);
+    });
+}
+
+display();
+function display(){
+  let list = JSON.parse(localStorage.getItem("emps")) || [];
+  let ul = document.getElementById("empList");
+  ul.innerHTML = "";
+
+  list.forEach((e,i)=>{
+    let li = document.createElement("li");
+    li.innerHTML = `${e} <button onclick="removeEmp(${i})">❌</button>`;
+    ul.appendChild(li);
+  });
+}
+
+function removeEmp(i){
+  let list = JSON.parse(localStorage.getItem("emps")) || [];
+  list.splice(i,1);
+  localStorage.setItem("emps", JSON.stringify(list));
+  display();
+}
+</script>
+
+</body>
+</html>

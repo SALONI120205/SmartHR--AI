@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Resume Screening</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/ai.js"></script>
+<script src="js/app.js"></script>
+</head>
+
+<body>
+
+<div class="sidebar">
+<h2>SmartHR</h2>
+<a onclick="go('dashboard.html')">Dashboard</a>
+</div>
+
+<div class="main">
+
+<h1>🤖 AI Resume Screening</h1>
+
+<input id="skills" placeholder="Skills (comma separated)">
+<input id="jobSkills" placeholder="Required Job Skills">
+
+<input id="experience" type="number" placeholder="Years of Experience">
+
+<textarea id="resumeText" placeholder="Paste full resume text here"></textarea>
+
+<br><br>
+<button onclick="analyze()">Analyze Resume</button>
+
+<h2 id="score"></h2>
+<h3 id="result"></h3>
+
+</div>
+
+</body>
+</html>

@@ -14,7 +14,7 @@ def login():
 
         if username == "admin" and password == "1234":
             session['user'] = username
-            return redirect('/index.html')
+            return redirect('/dashboard')
         else:
             return "Invalid Credentials ❌"
 
@@ -46,7 +46,7 @@ def employees():
 def dashboard():
     if 'user' not in session:
      return redirect('/')
-    return render_template('dashboard.html')
+    return render_template('index.html')
 
 @app.route('/calendar')
 def calendar():

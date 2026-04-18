@@ -6,7 +6,22 @@ function analyze(){
     let resumeText = document.getElementById("resumeText").value.toLowerCase();
 
     let score = 0;
+async function analyze() {
+  let file = document.getElementById("resumeFile").files[0];
 
+  let formData = new FormData();
+  formData.append("resume", file);
+
+  let res = await fetch("/analyze", {
+    method: "POST",
+    body: formData
+  });
+
+  let data = await res.json();
+
+  document.getElementById("result").innerHTML =
+    "Score: " + data.score + "%<br>" + data.result;
+}
     // 🔹 Skill Matching (50%)
     jobSkills.forEach(skill=>{
         if(userSkills.includes(skill.trim())){

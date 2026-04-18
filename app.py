@@ -20,5 +20,17 @@ def analyze():
         "result": result
     })
 
+    @app.route("/employees")
+    def employees():
+     return render_template("employees.html")
+
+@app.route("/resume")
+def resume_page():
+    return render_template("resume.html")
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -8,25 +8,24 @@
 /* BODY */
 body {
     font-family: 'Segoe UI', sans-serif;
-    background: #f4f7fb;
-    color: #333;
+    background: #f5f7fb;
+    color: #222;
 }
 
 /* SIDEBAR */
 .sidebar {
-    width: 230px;
+    width: 240px;
     height: 100vh;
     position: fixed;
-    background: linear-gradient(180deg, #1e3c72, #2a5298);
+    background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
     color: white;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
 }
 
+/* LOGO */
 .sidebar h2 {
     font-size: 22px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .sidebar p {
@@ -35,32 +34,36 @@ body {
     margin-bottom: 20px;
 }
 
-/* MENU LINKS */
+/* MENU */
 .sidebar a {
+    display: block;
     text-decoration: none;
-    color: white;
-    padding: 10px 12px;
-    margin: 6px 0;
-    border-radius: 8px;
+    color: #fff;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
     transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
     font-size: 14px;
 }
 
+/* HOVER */
 .sidebar a:hover {
     background: rgba(255,255,255,0.2);
+    transform: translateX(5px);
 }
 
+/* ACTIVE */
 .sidebar a.active {
-    background: rgba(255,255,255,0.3);
+    background: #ffffff;
+    color: #2c5364;
+    font-weight: bold;
 }
 
 /* MAIN */
 .main {
-    margin-left: 250px;
-    padding: 30px;
+    margin-left: 260px;
+    padding: 40px;
 }
 
 /* HERO SECTION */
@@ -68,55 +71,60 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
-.hero h1 {
-    font-size: 28px;
+/* TEXT */
+.hero-text h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.hero-text p {
+    color: #555;
     margin-bottom: 10px;
 }
 
-.hero p {
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.hero ul {
+.hero-text ul {
     margin-top: 10px;
     padding-left: 20px;
 }
 
-.hero li {
-    margin-bottom: 5px;
+.hero-text li {
+    margin-bottom: 6px;
 }
 
-.hero img {
-    width: 140px;
-    border-radius: 50%;
+/* IMAGE */
+.hero-img img {
+    width: 150px;
 }
 
 /* CARDS */
 .cards {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 20px;
 }
 
+/* CARD DESIGN */
 .card {
-    background: white;
+    background: #fff;
     padding: 20px;
     border-radius: 15px;
-    width: 200px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    cursor: pointer;
+    width: 220px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     transition: 0.3s;
+    cursor: pointer;
 }
 
+/* HOVER EFFECT */
 .card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
+/* CARD TEXT */
 .card h3 {
     font-size: 16px;
     margin-bottom: 5px;
@@ -124,84 +132,78 @@ body {
 
 .card p {
     font-size: 13px;
-    color: gray;
+    color: #777;
 }
 
-/* CONTENT BOX */
-.box {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-/* INPUTS */
-input, button {
+/* INPUT BOX */
+input {
+    width: 100%;
     padding: 10px;
     margin: 8px 0;
     border-radius: 8px;
     border: 1px solid #ccc;
-    outline: none;
 }
 
-input {
-    width: 100%;
-}
-
+/* BUTTON */
 button {
-    background: #2a5298;
+    padding: 10px 15px;
+    background: #2c5364;
     color: white;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 button:hover {
-    background: #1e3c72;
+    background: #203a43;
 }
 
 /* TABLE */
 table {
     width: 100%;
+    margin-top: 20px;
     border-collapse: collapse;
-    margin-top: 15px;
 }
 
 th, td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    text-align: left;
 }
 
 th {
-    background: #f0f3f8;
+    background: #f1f5f9;
 }
 
 /* LIST */
-ul {
-    list-style: none;
-}
-
 li {
-    padding: 8px;
+    padding: 6px;
     border-bottom: 1px solid #eee;
 }
 
-/* SMALL TEXT */
-.small {
-    font-size: 12px;
-    color: gray;
+/* DARK MODE */
+.dark {
+    background: #121212;
+    color: white;
+}
+
+.dark .card {
+    background: #1e1e1e;
+}
+
+.dark .sidebar {
+    background: #000;
 }
 
 /* RESPONSIVE */
-@media (max-width: 768px) {
+@media(max-width: 768px) {
     .sidebar {
         width: 180px;
     }
 
     .main {
         margin-left: 190px;
+        padding: 20px;
     }
 
     .cards {

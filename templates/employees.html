@@ -1,84 +1,90 @@
-<div class="main">
-  <h2>Employees</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employees</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
 
-  <!-- Search -->
-  <input type="text" id="search" placeholder="Search employee..." onkeyup="searchEmp()">
+<h2>👩‍💼 Employees</h2>
 
-  <!-- Add Employee -->
-  <input type="text" id="name" placeholder="Name">
-  <input type="text" id="age" placeholder="Age">
-  <input type="text" id="role" placeholder="Role">
-  <input type="number" id="salary" placeholder="Salary">
-  <button onclick="addEmployee()">Add</button>
+<!-- SEARCH -->
+<input type="text" id="search" placeholder="Search employee">
+<button onclick="searchEmployee()">Search</button>
 
-  <!-- Table -->
-  <table id="empTable">
-    <tr>
-      <th>Name</th>
-      <th>Role</th>
-      <th>Salary</th>
-      <th>Action</th>
-    </tr>
-  </table>
-</div>
+<br><br>
+
+<!-- ADD -->
+<input type="text" id="name" placeholder="Name">
+<input type="text" id="role" placeholder="Role">
+<input type="number" id="salary" placeholder="Salary">
+<button onclick="addEmployee()">Add</button>
+
+<br><br>
+
+<!-- TABLE -->
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Salary</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="table"></tbody>
+</table>
 
 <script>
 let employees = JSON.parse(localStorage.getItem("employees")) || [];
 
-function render() {
-  let table = document.getElementById("empTable");
-  table.innerHTML = `
-    <tr>
-      <th>Name</th>
-      <th>Role</th>
-      <th>Salary</th>
-      <th>Action</th>
-    </tr>
-  `;
+function display(data){
+    let table = document.getElementById("table");
+    table.innerHTML = "";
 
-  employees.forEach((emp, index) => {
-    table.innerHTML += `
-      <tr>
-        <td>${emp.name}</td>
-        <td>${emp.role}</td>
-        <td>₹${emp.salary}</td>
-        <td><button onclick="deleteEmp(${index})">❌</button></td>
-      </tr>
-    `;
-  });
+    data.forEach((e, i) => {
+        table.innerHTML += `
+        <tr>
+            <td>${e.name}</td>
+            <td>${e.role}</td>
+            <td>${e.salary}</td>
+            <td>
+                <button onclick="deleteEmp(${i})">❌</button>
+            </td>
+        </tr>`;
+    });
 }
 
-function addEmployee() {
-  let name = document.getElementById("name").value;
-  let role = document.getElementById("role").value;
-  let salary = document.getElementById("salary").value;
+function addEmployee(){
+    let name = document.getElementById("name").value;
+    let role = document.getElementById("role").value;
+    let salary = document.getElementById("salary").value;
 
-  if (!name || !role || !salary) {
-    alert("Fill all fields");
-    return;
-  }
+    if(!name || !role || !salary){
+        alert("Fill all fields");
+        return;
+    }
 
-  employees.push({ name, role, salary });
-  localStorage.setItem("employees", JSON.stringify(employees));
-  render();
+    employees.push({name, role, salary});
+    localStorage.setItem("employees", JSON.stringify(employees));
+
+    display(employees);
 }
 
-function deleteEmp(i) {
-  employees.splice(i, 1);
-  localStorage.setItem("employees", JSON.stringify(employees));
-  render();
+function deleteEmp(i){
+    employees.splice(i,1);
+    localStorage.setItem("employees", JSON.stringify(employees));
+    display(employees);
 }
 
-function searchEmp() {
-  let input = document.getElementById("search").value.toLowerCase();
-  let rows = document.querySelectorAll("#empTable tr");
-
-  rows.forEach((row, i) => {
-    if (i === 0) return;
-    let text = row.innerText.toLowerCase();
-    row.style.display = text.includes(input) ? "" : "none";
-  });
+function searchEmployee(){
+    let q = document.getElementById("search").value.toLowerCase();
+    let filtered = employees.filter(e => e.name.toLowerCase().includes(q));
+    display(filtered);
 }
 
-render();
+display(employees);
 </script>
+
+</body>
+</html>

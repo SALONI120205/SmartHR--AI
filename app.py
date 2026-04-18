@@ -4,60 +4,69 @@ import random
 
 app = Flask(__name__)
 
-# Folder for resume uploads
+# ---------------- CONFIG ---------------- #
+
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
-# ---------------- ROUTES ---------------- #
+# ---------------- MAIN ROUTES ---------------- #
 
-# Home Page
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-# Dashboard
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
 
 
-# Employees Page
 @app.route("/employees")
 def employees():
     return render_template("employees.html")
 
 
-# Resume Page
-@app.route("/resume")
-def resume_page():
-    return render_template("resume.html")
+@app.route("/calendar")
+def calendar():
+    return render_template("calendar.html")
 
 
-# Attendance
 @app.route("/attendance")
 def attendance():
     return render_template("attendance.html")
 
 
-# Salary
 @app.route("/salary")
 def salary():
     return render_template("salary.html")
 
 
-# Meetings
 @app.route("/meetings")
 def meetings():
     return render_template("meetings.html")
 
 
-# Gallery
+@app.route("/resume")
+def resume():
+    return render_template("resume.html")
+
+
 @app.route("/gallery")
 def gallery():
     return render_template("gallery.html")
+
+
+# ---------------- IMPORTANT FIX (FOR YOUR JS) ---------------- #
+# This allows onclick="go('dashboard.html')" to work
+
+@app.route("/<page>")
+def load_html_page(page):
+    try:
+        return render_template(page)
+    except:
+        return "Page not found", 404
 
 
 # ---------------- AI RESUME API ---------------- #
@@ -72,7 +81,7 @@ def analyze():
     filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
     file.save(filepath)
 
-    # Fake AI Score
+    # Fake AI score
     score = random.randint(50, 95)
     result = "✅ Selected" if score > 65 else "❌ Rejected"
 
@@ -82,7 +91,8 @@ def analyze():
     })
 
 
-# Download uploaded files
+# ---------------- DOWNLOAD FILE ---------------- #
+
 @app.route("/uploads/<filename>")
 def uploaded_file(filename):
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)

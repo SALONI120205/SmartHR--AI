@@ -1,26 +1,45 @@
-<div class="main">
-  <h2>AI Resume Screening 🤖</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume</title>
+</head>
+<body>
 
-  <input type="file" id="resumeFile">
-  <button onclick="analyze()">Analyze</button>
+<h2>🤖 AI Resume Screening</h2>
 
-  <p id="result"></p>
-</div>
+<input type="file" id="file">
+<br><br>
+<button onclick="analyze()">Analyze</button>
+
+<br><br>
+
+<div id="result"></div>
 
 <script>
-function analyze() {
-  let file = document.getElementById("resumeFile").files[0];
+async function analyze(){
+    let file = document.getElementById("file").files[0];
 
-  if (!file) {
-    alert("Upload resume first");
-    return;
-  }
+    if(!file){
+        alert("Upload file first");
+        return;
+    }
 
-  // Fake AI logic (frontend demo)
-  let score = Math.floor(Math.random() * 100);
+    let formData = new FormData();
+    formData.append("resume", file);
 
-  document.getElementById("result").innerHTML =
-    "Resume Score: " + score + "%<br>" +
-    (score > 60 ? "✅ Selected" : "❌ Rejected");
+    let res = await fetch("/analyze", {
+        method: "POST",
+        body: formData
+    });
+
+    let data = await res.json();
+
+    document.getElementById("result").innerHTML = `
+        <h3>Score: ${data.score}</h3>
+        <h3>${data.result}</h3>
+    `;
 }
 </script>
+
+</body>
+</html>

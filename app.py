@@ -4,13 +4,14 @@ app = Flask(__name__)
 app.secret_key = "secret123"
 
 # LOGIN PAGE
+
 @app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])   # ADD HERE ONLY
 def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
 
-        # simple demo login
         if username == "admin" and password == "1234":
             session['user'] = username
             return redirect('/dashboard')
@@ -18,7 +19,6 @@ def login():
             return "Invalid Credentials ❌"
 
     return render_template('login.html')
-
 
 @app.route('/logout')
 def logout():

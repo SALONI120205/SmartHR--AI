@@ -1,70 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>AI Resume Screening</title>
-
-<link rel="stylesheet" href="/static/style.css">
-<script src="/js/app.js"></script>
+    <title>Resume AI - SmartHR</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/js/ai.js"></script>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
     <h2>SmartHR</h2>
-    <p class="tagline">AI Powered Hiring</p>
 
-    <a onclick="go('/dashboard')">📊 Dashboard</a>
-    <a onclick="go('/employees')">👨‍💼 Employees</a>
-    <a class="active">🤖 Resume AI</a>
+    <button onclick="go('/dashboard')">📊 Dashboard</button>
+    <button onclick="go('/employees')">👨‍💼 Employees</button>
+    <button onclick="go('/calendar')">📅 Calendar</button>
+    <button onclick="go('/attendance')">📝 Attendance</button>
+    <button onclick="go('/salary')">💰 Salary</button>
+    <button onclick="go('/meetings')">⏰ Meetings</button>
+    <button class="active">🤖 Resume AI</button>
 </div>
 
-<!-- MAIN -->
 <div class="main">
+    <h1>🤖 AI Resume Screening</h1>
 
-<h1>🤖 AI Resume Screening</h1>
+    <div class="card">
+        <input type="file" id="resumeFile">
+        <button onclick="analyzeResume()">Analyze Resume</button>
 
-<!-- ORANGE CARD -->
-<div class="resume-box">
-
-    <input type="file" id="resumeFile">
-
-    <button onclick="analyzeResume()">Analyze Resume</button>
-
-    <h2 id="score"></h2>
-    <h3 id="result"></h3>
-
+        <h2 id="score"></h2>
+        <h3 id="result"></h3>
+    </div>
 </div>
-
-</div>
-
-<script>
-function analyzeResume(){
-    let file = document.getElementById("resumeFile").files[0];
-
-    if(!file){
-        alert("Upload resume first!");
-        return;
-    }
-
-    document.getElementById("score").innerText = "Analyzing...";
-
-    setTimeout(() => {
-        let score = Math.floor(Math.random() * 100);
-
-        document.getElementById("score").innerText = "Score: " + score + "%";
-
-        if(score > 75){
-            document.getElementById("result").innerText = "✅ Selected";
-            document.getElementById("result").style.color = "green";
-        } else {
-            document.getElementById("result").innerText = "❌ Rejected";
-            document.getElementById("result").style.color = "red";
-        }
-
-    }, 1000);
-}
-</script>
 
 </body>
 </html>

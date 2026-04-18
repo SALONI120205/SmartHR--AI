@@ -52,3 +52,61 @@ function searchEmployee(){
 }
 
 display(employees);
+// NAVIGATION
+function go(path) {
+    window.location.href = path;
+}
+
+// ================= EMPLOYEES =================
+
+// ADD
+function addEmployee() {
+    let name = document.getElementById("name").value.trim();
+    let role = document.getElementById("role").value.trim();
+
+    if (!name || !role) {
+        alert("Fill all fields");
+        return;
+    }
+
+    let list = JSON.parse(localStorage.getItem("employees")) || [];
+
+    list.push({ name, role });
+
+    localStorage.setItem("employees", JSON.stringify(list));
+
+    showEmployees();
+}
+
+// SHOW
+function showEmployees() {
+    let list = JSON.parse(localStorage.getItem("employees")) || [];
+    let table = document.getElementById("empTable");
+
+    if (!table) return;
+
+    table.innerHTML = "";
+
+    list.forEach((e, i) => {
+        table.innerHTML += `
+            <tr>
+                <td>${e.name}</td>
+                <td>${e.role}</td>
+                <td><button onclick="deleteEmp(${i})">Delete</button></td>
+            </tr>
+        `;
+    });
+}
+
+// DELETE
+function deleteEmp(i) {
+    let list = JSON.parse(localStorage.getItem("employees")) || [];
+    list.splice(i, 1);
+    localStorage.setItem("employees", JSON.stringify(list));
+    showEmployees();
+}
+
+// AUTO LOAD
+window.onload = function () {
+    showEmployees();
+};

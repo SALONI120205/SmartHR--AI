@@ -16,7 +16,13 @@ function display(data){
         </tr>`;
     });
 }
+function go(page){
+    window.location.href = page;
+}
 
+function toggleDark(){
+    document.body.classList.toggle("dark");
+}
 function addEmployee(){
     let name = document.getElementById("name").value;
     let role = document.getElementById("role").value;

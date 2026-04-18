@@ -1,45 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Resume</title>
-</head>
-<body>
+<div class="resume-box">
+  <h2>AI Resume Screening</h2>
 
-<h2>🤖 AI Resume Screening</h2>
+  <input type="file" id="resumeFile">
+  <br><br>
 
-<input type="file" id="file">
-<br><br>
-<button onclick="analyze()">Analyze</button>
+  <button onclick="analyze()">Analyze</button>
 
-<br><br>
-
-<div id="result"></div>
-
-<script>
-async function analyze(){
-    let file = document.getElementById("file").files[0];
-
-    if(!file){
-        alert("Upload file first");
-        return;
-    }
-
-    let formData = new FormData();
-    formData.append("resume", file);
-
-    let res = await fetch("/analyze", {
-        method: "POST",
-        body: formData
-    });
-
-    let data = await res.json();
-
-    document.getElementById("result").innerHTML = `
-        <h3>Score: ${data.score}</h3>
-        <h3>${data.result}</h3>
-    `;
-}
-</script>
-
-</body>
-</html>
+  <h3 id="score"></h3>
+  <h3 id="result"></h3>
+</div>

@@ -53,6 +53,31 @@ body {
     background: white;
     cursor: pointer;
 }
+.sidebar {
+  width: 230px;
+  height: 100vh;
+  background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+  padding: 20px;
+  color: white;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: left;
+}
+
+.sidebar button:hover {
+  background: #00c6ff;
+  color: black;
+}
 
 /* MAIN */
 .main {

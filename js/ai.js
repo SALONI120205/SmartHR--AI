@@ -1,13 +1,16 @@
 function analyze(){
+    let score = Math.floor(Math.random() * 100);
 
-    let file = document.getElementById("resumeFile").files[0];
+    document.getElementById("score").innerText = "Score: " + score + "%";
 
-    if(!file){
-        alert("Upload resume first");
-        return;
+    if(score >= 70){
+        document.getElementById("result").innerText = "✅ Selected";
+        document.getElementById("result").style.color = "green";
+    } else {
+        document.getElementById("result").innerText = "❌ Rejected";
+        document.getElementById("result").style.color = "red";
     }
-
-    document.getElementById("score").innerText = "Analyzing...";
+}
 
     setTimeout(() => {
 
@@ -24,4 +27,3 @@ function analyze(){
         }
 
     }, 1000);
-}

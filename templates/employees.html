@@ -2,28 +2,29 @@
 <html>
 <head>
     <title>Employees</title>
-    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-<h2>👩‍💼 Employees</h2>
+<h2>Employees</h2>
 
-<!-- SEARCH -->
-<input type="text" id="search" placeholder="Search employee">
+<a href="/dashboard">⬅ Back</a>
+
+<br><br>
+
+<input id="search" placeholder="Search">
 <button onclick="searchEmployee()">Search</button>
 
 <br><br>
 
-<!-- ADD -->
-<input type="text" id="name" placeholder="Name">
-<input type="text" id="role" placeholder="Role">
-<input type="number" id="salary" placeholder="Salary">
+<input id="name" placeholder="Name">
+<input id="age" placeholder="Age">
+<input id="role" placeholder="Role">
+<input id="salary" placeholder="Salary">
 <button onclick="addEmployee()">Add</button>
 
 <br><br>
 
-<!-- TABLE -->
-<table border="1" width="100%">
+<table border="1">
     <thead>
         <tr>
             <th>Name</th>
@@ -35,56 +36,7 @@
     <tbody id="table"></tbody>
 </table>
 
-<script>
-let employees = JSON.parse(localStorage.getItem("employees")) || [];
-
-function display(data){
-    let table = document.getElementById("table");
-    table.innerHTML = "";
-
-    data.forEach((e, i) => {
-        table.innerHTML += `
-        <tr>
-            <td>${e.name}</td>
-            <td>${e.role}</td>
-            <td>${e.salary}</td>
-            <td>
-                <button onclick="deleteEmp(${i})">❌</button>
-            </td>
-        </tr>`;
-    });
-}
-
-function addEmployee(){
-    let name = document.getElementById("name").value;
-    let role = document.getElementById("role").value;
-    let salary = document.getElementById("salary").value;
-
-    if(!name || !role || !salary){
-        alert("Fill all fields");
-        return;
-    }
-
-    employees.push({name, role, salary});
-    localStorage.setItem("employees", JSON.stringify(employees));
-
-    display(employees);
-}
-
-function deleteEmp(i){
-    employees.splice(i,1);
-    localStorage.setItem("employees", JSON.stringify(employees));
-    display(employees);
-}
-
-function searchEmployee(){
-    let q = document.getElementById("search").value.toLowerCase();
-    let filtered = employees.filter(e => e.name.toLowerCase().includes(q));
-    display(filtered);
-}
-
-display(employees);
-</script>
+<script src="/js/app.js"></script>
 
 </body>
 </html>

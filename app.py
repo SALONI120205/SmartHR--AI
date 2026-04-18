@@ -14,7 +14,7 @@ def login():
 
         if username == "admin" and password == "1234":
             session['user'] = username
-            return redirect('/dashboard')
+            return redirect('/index.html')
         else:
             return "Invalid Credentials ❌"
 

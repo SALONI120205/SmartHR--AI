@@ -1,29 +1,75 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>SmartHR AI</title>
-
-<link rel="stylesheet" href="/static/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<script src="/js/app.js"></script>
-<script src="/js/ai.js"></script>
-</head>
-
-<body>
-
+/
 <!-- SIDEBAR -->
 <div class="sidebar">
     <h2>SmartHR</h2>
     <p class="tagline">Manage employees, meetings, and AI hiring.</p>
 
-    <a onclick="go('/dashboard')">📊 Dashboard</a>
-    <a onclick="go('/employees')">👨‍💼 Employees</a>
-    <a onclick="go('/calendar')">📅 Calendar</a>
-    <a onclick="go('/attendance')">📝 Attendance</a>
-    <a onclick="go('/salary')">💰 Salary</a>
-    <a onclick="go('/meetings')">⏰ Meetings</a>
-    <a onclick="go('/resume')">🤖 Resume AI</a>
-    <a onclick="go('/gallery')">🖼 Gallery</a>
+    <a onclick="go('dashboard.html')"><i class="fas fa-chart-line"></i> Dashboard</a>
+    <a onclick="go('employees.html')"><i class="fas fa-users"></i> Employees</a>
+    <a onclick="go('calendar.html')"><i class="fas fa-calendar"></i> Calendar</a>
+    <a onclick="go('attendance.html')">📅 Attendance</a>
+<a onclick="go('salary.html')">💰 Salary</a>
+    <a onclick="go('meetings.html')"><i class="fas fa-clock"></i> Meetings</a>
+    <a onclick="go('resume.html')"><i class="fas fa-brain"></i> Resume AI</a>
+    <a onclick="go('gallery.html')"><i class="fas fa-image"></i> Gallery</a>
 
-   
+    <button onclick="toggleDark()">🌙 Dark Mode</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Welcome to SmartHR AI 🚀</h1>
+            <p>Your intelligent HR assistant for managing employees, meetings, and AI hiring.</p>
+
+            <ul>
+                <li>✔ Employee Management</li>
+                <li>✔ Smart Calendar</li>
+                <li>✔ Meeting Scheduler</li>
+                <li>✔ AI Resume Screening</li>
+            </ul>
+
+            <div class="ai-box">
+                💡 AI Insight: Hiring demand is increasing this week
+            </div>
+        </div>
+
+        <div class="hero-img">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+        </div>
+    </div>
+
+    <!-- CARDS -->
+    <div class="cards">
+
+        <div class="card" onclick="go('employees.html')">
+            <h3>👨‍💼 Employees</h3>
+            <p>Manage staff</p>
+        </div>
+
+        <div class="card" onclick="go('calendar.html')">
+            <h3>📅 Calendar</h3>
+            <p>Track events</p>
+        </div>
+
+        <div class="card" onclick="go('resume.html')">
+            <h3>🤖 AI Resume</h3>
+            <p>Smart hiring</p>
+        </div>
+
+        <div class="card" onclick="go('meetings.html')">
+            <h3>⏰ Meetings</h3>
+            <p>Schedule easily</p>
+        </div>
+        <p style="margin-top:20px; color:gray; font-size:13px;">
+📊 System Status: All HR modules running smoothly
+</p>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -20,14 +20,6 @@ def login():
     return render_template('login.html')
 
 
-# PROTECT ROUTES
-@app.route('/dashboard')
-def dashboard():
-    if 'user' not in session:
-        return redirect('/')
-    return render_template('index.html')
-
-
 @app.route('/logout')
 def logout():
     session.pop('user', None)

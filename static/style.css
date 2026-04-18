@@ -210,3 +210,21 @@ li {
         flex-direction: column;
     }
 }
+.resume-box {
+    margin-top: 20px;
+    padding: 30px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
+    text-align: center;
+}
+
+.resume-box input {
+    margin: 10px;
+}
+
+.resume-box button {
+    background: white;
+    color: #ff7e5f;
+    font-weight: bold;
+}

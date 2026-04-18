@@ -1,50 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Resume Screening</title>
+<title>AI Resume Screening</title>
 
-    <link rel="stylesheet" href="/static/style.css">
-    <script src="js/app.js"></script>
-<script src="js/ai.js"></script>
-
+<link rel="stylesheet" href="/static/style.css">
+<script src="/js/app.js"></script>
 </head>
 
 <body>
 
-<div class="container">
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>SmartHR</h2>
+    <p class="tagline">AI Powered Hiring</p>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <h2>Smart HR</h2>
+    <a onclick="go('/dashboard')">📊 Dashboard</a>
+    <a onclick="go('/employees')">👨‍💼 Employees</a>
+    <a class="active">🤖 Resume AI</a>
+</div>
 
-        <button onclick="go('/')">Dashboard</button>
-        <button onclick="go('/employees')">Employees</button>
-        <button class="active">AI Resume</button>
+<!-- MAIN -->
+<div class="main">
 
-        <button onclick="toggleDark()">🌙 Dark Mode</button>
-    </div>
+<h1>🤖 AI Resume Screening</h1>
 
-    <!-- MAIN -->
-    <div class="main">
+<!-- ORANGE CARD -->
+<div class="resume-box">
 
-        <h1>AI Resume Screening</h1>
+    <input type="file" id="resumeFile">
 
-        <div class="card">
+    <button onclick="analyzeResume()">Analyze Resume</button>
 
-            <input type="file" id="resumeFile">
-
-            <button onclick="analyzeResume()">Analyze</button>
-
-            <h2 id="score"></h2>
-            <h3 id="result"></h3>
-
-        </div>
-
-    </div>
+    <h2 id="score"></h2>
+    <h3 id="result"></h3>
 
 </div>
 
-<script src="/static/app.js"></script>
+</div>
+
+<script>
+function analyzeResume(){
+    let file = document.getElementById("resumeFile").files[0];
+
+    if(!file){
+        alert("Upload resume first!");
+        return;
+    }
+
+    document.getElementById("score").innerText = "Analyzing...";
+
+    setTimeout(() => {
+        let score = Math.floor(Math.random() * 100);
+
+        document.getElementById("score").innerText = "Score: " + score + "%";
+
+        if(score > 75){
+            document.getElementById("result").innerText = "✅ Selected";
+            document.getElementById("result").style.color = "green";
+        } else {
+            document.getElementById("result").innerText = "❌ Rejected";
+            document.getElementById("result").style.color = "red";
+        }
+
+    }, 1000);
+}
+</script>
 
 </body>
 </html>

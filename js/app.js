@@ -60,40 +60,55 @@ function go(path) {
 // ================= EMPLOYEES =================
 
 // ADD
-function addEmployee() {
-    let name = document.getElementById("name").value.trim();
-    let role = document.getElementById("role").value.trim();
+function addEmployee(){
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+    let city = document.getElementById("city").value;
+    let role = document.getElementById("role").value;
+    let salary = document.getElementById("salary").value;
 
-    if (!name || !role) {
+    if(!name || !age || !city || !role || !salary){
         alert("Fill all fields");
         return;
     }
 
     let list = JSON.parse(localStorage.getItem("employees")) || [];
 
-    list.push({ name, role });
+    list.push({name, age, city, role, salary});
 
     localStorage.setItem("employees", JSON.stringify(list));
 
     showEmployees();
+
+    document.getElementById("name").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("city").value = "";
+    document.getElementById("role").value = "";
+    document.getElementById("salary").value = "";
 }
 
 // SHOW
-function showEmployees() {
+function showEmployees(){
     let list = JSON.parse(localStorage.getItem("employees")) || [];
-    let table = document.getElementById("empTable");
 
-    if (!table) return;
+    let table = document.getElementById("empTable").querySelector("tbody");
 
     table.innerHTML = "";
 
-    list.forEach((e, i) => {
+    list.forEach((emp, index)=>{
         table.innerHTML += `
-            <tr>
-                <td>${e.name}</td>
-                <td>${e.role}</td>
-                <td><button onclick="deleteEmp(${i})">Delete</button></td>
-            </tr>
+        <tr>
+            <td>${emp.name}</td>
+            <td>${emp.age}</td>
+            <td>${emp.city}</td>
+            <td>${emp.role}</td>
+            <td>₹${emp.salary}</td>
+            <td style="text-align:center;">
+                <button class="delete-btn" onclick="deleteEmployee(${index})">
+                    ❌ Delete
+                </button>
+            </td>
+        </tr>
         `;
     });
 }

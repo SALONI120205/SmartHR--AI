@@ -37,7 +37,7 @@ def meetings():
     return render_template('meetings.html')
 
 @app.route('/resume')
-def home():
+def resume():
     return 
 render_template('resume.html')
 

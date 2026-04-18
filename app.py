@@ -38,8 +38,7 @@ def meetings():
 
 @app.route('/resume')
 def resume():
-    return 
-render_template('resume.html')
+    return render_template('resume.html')
 
 
 @app.route('/gallery')

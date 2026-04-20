@@ -1,33 +1,158 @@
-<div class="main">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Resume Screening</title>
 
-    <h1 class="page-title">🤖 AI Resume Screening</h1>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
 
-    <div class="resume-container">
+        .container {
+            display: flex;
+        }
 
-        <div class="resume-card">
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+            padding: 20px;
+            color: white;
+        }
 
-            <label class="upload-box">
-                <input type="file" id="resumeFile">
-                <span>📄 Upload Resume</span>
-            </label>
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
 
-            <button onclick="analyzeResume()" class="analyze-btn">
-                Analyze Resume
-            </button>
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .sidebar a:hover {
+            background: #4facfe;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .score {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .selected {
+            color: green;
+            font-weight: bold;
+        }
+
+        .rejected {
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>SmartHR</h2>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/employees">Employees</a>
+        <a href="/calendar">Calendar</a>
+        <a href="/attendance">Attendance</a>
+        <a href="/salary">Salary</a>
+        <a href="/meetings">Meetings</a>
+        <a href="/resume">Resume AI</a>
+        <a href="/gallery">Gallery</a>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+
+        <div class="card">
+            <h1>🤖 AI Resume Screening</h1>
+
+            <!-- FORM -->
+            <form action="/resume" method="POST" enctype="multipart/form-data">
+
+                <input type="file" name="resume" accept=".pdf" required>
+
+                <button type="submit">Analyze Resume</button>
+
+            </form>
 
             <!-- RESULT -->
-            <div id="resultBox" class="result-box hidden">
-                <h2 id="scoreText">Score: 0%</h2>
-
-                <div class="progress">
-                    <div id="progressBar"></div>
+            {% if score is defined %}
+                <div class="score">
+                    Score: {{ score }}%
                 </div>
 
-                <p id="statusText"></p>
-            </div>
+                {% if score >= 60 %}
+                    <p class="selected">✔ Selected</p>
+                {% else %}
+                    <p class="rejected">✘ Rejected</p>
+                {% endif %}
+            {% endif %}
 
         </div>
 
     </div>
 
 </div>
+
+</body>
+</html>

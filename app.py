@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request,redirect,session ,send_from_directory
-
+from PyPDF2 import PdfReader
 app = Flask(__name__)
 app.secret_key = "secret123"
 
@@ -72,11 +72,27 @@ def meetings():
      return redirect('/')
     return render_template('meetings.html')
 
-@app.route('/resume')
+@app.route('/resume', methods=['GET', 'POST'])
 def resume():
-    if 'user' not in session:
-     return redirect('/')
-    return render_template('resume.html')
+    score = 0
+
+    if request.method == 'POST':
+        file = request.files['resume']
+
+        if file:
+            text = file.read().decode('utf-8', errors='ignore')
+
+            # simple keyword logic
+            keywords = ['python', 'java', 'html', 'css', 'flask', 'sql']
+            matches = 0
+
+            for word in keywords:
+                if word.lower() in text.lower():
+                    matches += 1
+
+            score = int((matches / len(keywords)) * 100)
+
+    return render_template('resume.html', score=score)
 
 
 @app.route('/gallery')
